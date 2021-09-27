@@ -4,6 +4,8 @@
       <div class="header">My personal costs</div>
     </header>
     <main>
+      <button @click="showAddForm">ADD NEW COST +</button>
+      <AddPaymentForm @addNewPayment="addNewPayment" :showForm="showForm" />
       <PaymentsDisplay :items="paymentsList" />
     </main>
   </div>
@@ -11,16 +13,19 @@
 
 <script>
 import PaymentsDisplay from "./components/PaymentsDisplay.vue";
+import AddPaymentForm from "./components/AddPaymentForm.vue";
 
 export default {
   name: "App",
   components: {
     PaymentsDisplay,
+    AddPaymentForm,
   },
 
   data: () => {
     return {
       paymentsList: [],
+      showForm: false,
     };
   },
 
@@ -47,7 +52,15 @@ export default {
         },
       ];
     },
+    addNewPayment(data) {
+      data.id = this.paymentsList.length+1;
+      this.paymentsList = [...this.paymentsList, data];
+    },
+    showAddForm() {
+      return (this.showForm = !this.showForm);
+    },
   },
+
   created() {
     this.paymentsList = this.fetchData();
   },
