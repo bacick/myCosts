@@ -6,7 +6,7 @@
     <main>
       <button @click="showAddForm">ADD NEW COST +</button>
       <AddPaymentForm @addNewPayment="addNewPayment" :showForm="showForm" />
-      <PaymentsDisplay :items="paymentsList" />
+      <PaymentsDisplay :items="getPaymentList" />
     </main>
   </div>
 </template>
@@ -14,6 +14,7 @@
 <script>
 import PaymentsDisplay from "./components/PaymentsDisplay.vue";
 import AddPaymentForm from "./components/AddPaymentForm.vue";
+import { mapMutations, mapGetters } from "vuex";
 
 export default {
   name: "App",
@@ -30,6 +31,7 @@ export default {
   },
 
   methods: {
+    ...mapMutations(["setPaymentsListData"]),
     fetchData() {
       return [
         {
@@ -53,16 +55,21 @@ export default {
       ];
     },
     addNewPayment(data) {
-      data.id = this.paymentsList.length+1;
-      this.paymentsList = [...this.paymentsList, data];
+      data.id = this.getPaymentList.length + 1;
+      this.$store.commit('addDataToPaymentList', data);
     },
     showAddForm() {
       return (this.showForm = !this.showForm);
     },
   },
 
+  computed: {
+    ...mapGetters(["getPaymentList", "getFullPaymentValue"]),
+  },
+
   created() {
-    this.paymentsList = this.fetchData();
+    // this.paymentsList = this.fetchData();
+    this.setPaymentsListData(this.fetchData());
   },
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="add-form" v-if="showForm"> 
+  <div class="add-form" v-if="showForm">
     <input type="date" placeholder="Date" v-model="date" />
     <input type="text" placeholder="Category" v-model="category" />
     <input type="number" placeholder="Value" v-model.number="value" />
@@ -21,13 +21,12 @@ export default {
       category: "",
       value: "",
       date: "",
-
     };
   },
   methods: {
     onSaveClick() {
       const data = {
-        id: "", 
+        id: "",
         date: this.date || this.getCurrentDate,
         category: this.category,
         value: +this.value,
@@ -36,13 +35,13 @@ export default {
     },
   },
   computed: {
-      getCurrentDate() {
+    getCurrentDate() {
       const today = new Date();
       const day = today.getDate();
       const month = today.getMonth() + 1;
       const year = today.getFullYear();
       return `${day}.${month}.${year}`;
     },
-  }
+  },
 };
 </script>
