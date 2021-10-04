@@ -1,7 +1,12 @@
 <template>
   <div class="add-form" v-if="showForm">
     <input type="date" placeholder="Date" v-model="date" />
-    <input type="text" placeholder="Category" v-model="category" />
+    <select name="Category" v-model="category">
+      <option v-for="option in categoryList" :value="option" :key="option">
+        {{ option }}
+      </option>
+    </select>
+    <!-- <input type="text" placeholder="Category" v-model="category" /> -->
     <input type="number" placeholder="Value" v-model.number="value" />
     <button @click="onSaveClick">Save</button>
   </div>
@@ -14,6 +19,10 @@ export default {
     showForm: {
       type: Boolean,
       default: false,
+    },
+    categoryList: {
+      type: Array,
+      default: () => []
     },
   },
   data() {

@@ -5,7 +5,7 @@
     </header>
     <main>
       <button @click="showAddForm">ADD NEW COST +</button>
-      <AddPaymentForm @addNewPayment="addNewPayment" :showForm="showForm" />
+      <AddPaymentForm @addNewPayment="addNewPayment" :categoryList="getCategoryList" :showForm="showForm" />
       <PaymentsDisplay :items="getPaymentList" />
     </main>
   </div>
@@ -32,28 +32,28 @@ export default {
 
   methods: {
     ...mapMutations(["setPaymentsListData"]),
-    fetchData() {
-      return [
-        {
-          id: 1,
-          date: "28.03.2020",
-          category: "Food",
-          value: 169,
-        },
-        {
-          id: 2,
-          date: "24.03.2020",
-          category: "Transport",
-          value: 360,
-        },
-        {
-          id: 3,
-          date: "24.03.2020",
-          category: "Food",
-          value: 532,
-        },
-      ];
-    },
+    // fetchData() {
+    //   return [
+    //     {
+    //       id: 1,
+    //       date: "28.03.2020",
+    //       category: "Food",
+    //       value: 169,
+    //     },
+    //     {
+    //       id: 2,
+    //       date: "24.03.2020",
+    //       category: "Transport",
+    //       value: 360,
+    //     },
+    //     {
+    //       id: 3,
+    //       date: "24.03.2020",
+    //       category: "Food",
+    //       value: 532,
+    //     },
+    //   ];
+    // },
     addNewPayment(data) {
       data.id = this.getPaymentList.length + 1;
       this.$store.commit('addDataToPaymentList', data);
@@ -64,13 +64,28 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["getPaymentList", "getFullPaymentValue"]),
+    ...mapGetters([
+        "getPaymentList",
+        "getFullPaymentValue",
+        'getCategoryList']),
   },
+
+  // actions: {
+  //   ...mapActions(['loadCategotyList'])
+  // },
 
   created() {
     // this.paymentsList = this.fetchData();
-    this.setPaymentsListData(this.fetchData());
+    // this.setPaymentsListData(this.fetchData);
+    this.$store.dispatch('fetchData')
+    this.$store.dispatch('loadCategoryList')
   },
+  // mounted() {
+  //   if(!this.getCategoryList.length) {
+  //     // this.loadeCategoryList()
+  //     this.$store.dispatch('loadCategoryList')
+  //   }
+  // }
 };
 </script>
 
