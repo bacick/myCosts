@@ -2,7 +2,7 @@
   <div class="add-form" v-if="showForm">
     <input type="date" placeholder="Date" v-model="date" />
     <select name="Category" v-model="category">
-      <option v-for="option in categoryList" :value="option" :key="option">
+      <option v-for="(option, idx) in categoryList" :value="option" :key="idx">
         {{ option }}
       </option>
     </select>
@@ -22,7 +22,7 @@ export default {
     },
     categoryList: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
   },
   data() {

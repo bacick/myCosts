@@ -5,8 +5,13 @@
     </header>
     <main>
       <button @click="showAddForm">ADD NEW COST +</button>
-      <AddPaymentForm @addNewPayment="addNewPayment" :categoryList="getCategoryList" :showForm="showForm" />
+      <AddPaymentForm
+        @addNewPayment="addNewPayment"
+        :categoryList="getCategoryList"
+        :showForm="showForm"
+      />
       <PaymentsDisplay :items="getPaymentList" />
+      <Pagination :pages="pages" />
     </main>
   </div>
 </template>
@@ -14,6 +19,7 @@
 <script>
 import PaymentsDisplay from "./components/PaymentsDisplay.vue";
 import AddPaymentForm from "./components/AddPaymentForm.vue";
+import Pagination from "./components/Pagination.vue";
 import { mapMutations, mapGetters } from "vuex";
 
 export default {
@@ -21,53 +27,38 @@ export default {
   components: {
     PaymentsDisplay,
     AddPaymentForm,
+    Pagination,
   },
 
   data: () => {
     return {
-      paymentsList: [],
       showForm: false,
+      pages: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+      activPage: 1,
+      perPage: 3,
+      images: [],
     };
   },
 
   methods: {
     ...mapMutations(["setPaymentsListData"]),
-    // fetchData() {
-    //   return [
-    //     {
-    //       id: 1,
-    //       date: "28.03.2020",
-    //       category: "Food",
-    //       value: 169,
-    //     },
-    //     {
-    //       id: 2,
-    //       date: "24.03.2020",
-    //       category: "Transport",
-    //       value: 360,
-    //     },
-    //     {
-    //       id: 3,
-    //       date: "24.03.2020",
-    //       category: "Food",
-    //       value: 532,
-    //     },
-    //   ];
-    // },
+    
     addNewPayment(data) {
       data.id = this.getPaymentList.length + 1;
-      this.$store.commit('addDataToPaymentList', data);
+      this.$store.commit("addDataToPaymentList", data);
     },
     showAddForm() {
       return (this.showForm = !this.showForm);
     },
+    setImageElement() {
+      let from = (this.page * this.perPage) - this.perPage;
+      let to = this.page * this.perPage;
+      return this.images = this.getPaymentList.slice(from, to)
+    }
   },
 
   computed: {
-    ...mapGetters([
-        "getPaymentList",
-        "getFullPaymentValue",
-        'getCategoryList']),
+    ...mapGetters(["getPaymentList", "getFullPaymentValue", "getCategoryList"]),
   },
 
   // actions: {
@@ -77,8 +68,9 @@ export default {
   created() {
     // this.paymentsList = this.fetchData();
     // this.setPaymentsListData(this.fetchData);
-    this.$store.dispatch('fetchData')
-    this.$store.dispatch('loadCategoryList')
+    this.$store.dispatch("fetchData");
+    this.$store.dispatch("loadCategoryList");
+    this.setImageElement()
   },
   // mounted() {
   //   if(!this.getCategoryList.length) {

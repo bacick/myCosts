@@ -17,9 +17,9 @@ export default new Vuex.Store({
     },
     setCategoryList(state, payload) {
       if (!Array.isArray(payload)) {
-        payload = [payload]
+        payload = [payload];
       }
-      state.categoryList = payload
+      state.categoryList = payload;
     },
   },
   getters: {
@@ -30,7 +30,7 @@ export default new Vuex.Store({
     getCategoryList: (state) => state.categoryList,
   },
   actions: {
-    fetchData ({ commit }) {
+    fetchData({ commit }) {
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve([
@@ -52,22 +52,76 @@ export default new Vuex.Store({
               category: "Food",
               value: 532,
             },
-          ])
-        }, 3000)
-      })
-        .then(res => {
-          commit('setPaymentsListData', res)
-        })
+            {
+              id: 4,
+              date: "24.03.2020",
+              category: "Food",
+              value: 532,
+            },
+            {
+              id: 5,
+              date: "24.03.2020",
+              category: "Food",
+              value: 532,
+            },
+            {
+              id: 6,
+              date: "24.03.2020",
+              category: "Food",
+              value: 532,
+            },
+            {
+              id: 7,
+              date: "24.03.2020",
+              category: "Food",
+              value: 532,
+            },
+            {
+              id: 8,
+              date: "24.03.2020",
+              category: "Food",
+              value: 532,
+            },
+            {
+              id: 9,
+              date: "24.03.2020",
+              category: "Food",
+              value: 532,
+            },
+            {
+              id: 10,
+              date: "24.03.2020",
+              category: "Food",
+              value: 532,
+            },
+            {
+              id: 11,
+              date: "24.03.2020",
+              category: "Food",
+              value: 532,
+            },
+          ]);
+        }, 3000);
+      }).then((res) => {
+        commit("setPaymentsListData", res);
+      });
     },
     loadCategoryList({ commit }) {
       return new Promise((resolve) => {
         setTimeout(() => {
-          resolve(['Foot', 'Transport', 'Drugs', 'Harlots', 'Pets', 'Books', 'Alcohol'])
-        },2000)
-      })
-        .then(res => {
-          commit('setCategoryList', res)
-      })
+          resolve([
+            "Foot",
+            "Transport",
+            "Drugs",
+            "Harlots",
+            "Pets",
+            "Books",
+            "Alcohol",
+          ]);
+        }, 2000);
+      }).then((res) => {
+        commit("setCategoryList", res);
+      });
     },
-  }
+  },
 });
