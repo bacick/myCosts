@@ -33,75 +33,17 @@ export default new Vuex.Store({
     fetchData({ commit }) {
       return new Promise((resolve) => {
         setTimeout(() => {
-          resolve([
-            {
-              id: 1,
+          let elements = [];
+          for (let i = 0; i <= 100; i++) {
+            elements.push({
+              id: i,
               date: "28.03.2020",
               category: "Food",
-              value: 169,
-            },
-            {
-              id: 2,
-              date: "24.03.2020",
-              category: "Transport",
-              value: 360,
-            },
-            {
-              id: 3,
-              date: "24.03.2020",
-              category: "Food",
-              value: 532,
-            },
-            {
-              id: 4,
-              date: "24.03.2020",
-              category: "Food",
-              value: 532,
-            },
-            {
-              id: 5,
-              date: "24.03.2020",
-              category: "Food",
-              value: 532,
-            },
-            {
-              id: 6,
-              date: "24.03.2020",
-              category: "Food",
-              value: 532,
-            },
-            {
-              id: 7,
-              date: "24.03.2020",
-              category: "Food",
-              value: 532,
-            },
-            {
-              id: 8,
-              date: "24.03.2020",
-              category: "Food",
-              value: 532,
-            },
-            {
-              id: 9,
-              date: "24.03.2020",
-              category: "Food",
-              value: 532,
-            },
-            {
-              id: 10,
-              date: "24.03.2020",
-              category: "Food",
-              value: 532,
-            },
-            {
-              id: 11,
-              date: "24.03.2020",
-              category: "Food",
-              value: 532,
-            },
-          ]);
-        }, 3000);
+              value: i * 10,
+            });
+          }
+          resolve(elements);
+        }, 1000);
       }).then((res) => {
         commit("setPaymentsListData", res);
       });

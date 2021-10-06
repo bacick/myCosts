@@ -10,8 +10,8 @@
         :categoryList="getCategoryList"
         :showForm="showForm"
       />
-      <PaymentsDisplay :items="getPaymentList" />
-      <Pagination :pages="pages" />
+      <PaymentsDisplay :items="setImageElement" />
+      <Pagination :pages="pages" :activPage="activPage" @changepage="changeActivPage" />
     </main>
   </div>
 </template>
@@ -33,32 +33,43 @@ export default {
   data: () => {
     return {
       showForm: false,
-      pages: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+      pages: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
       activPage: 1,
-      perPage: 3,
-      images: [],
+      perPage: 10,
+      item: [],
     };
   },
 
   methods: {
     ...mapMutations(["setPaymentsListData"]),
-    
+
     addNewPayment(data) {
-      data.id = this.getPaymentList.length + 1;
+      data.id = this.paymentList.length + 1;
       this.$store.commit("addDataToPaymentList", data);
     },
     showAddForm() {
       return (this.showForm = !this.showForm);
     },
-    setImageElement() {
-      let from = (this.page * this.perPage) - this.perPage;
-      let to = this.page * this.perPage;
-      return this.images = this.getPaymentList.slice(from, to)
-    }
+    
+    changeActivPage(numPage) {
+      this.activPage = numPage;
+    },
   },
 
   computed: {
-    ...mapGetters(["getPaymentList", "getFullPaymentValue", "getCategoryList"]),
+    ...mapGetters([
+      "getPaymentList",
+      "getFullPaymentValue",
+      "getCategoryList"]),
+
+    paymentList () {
+      return this.$store.getters.getPaymentList
+    },
+    setImageElement() {
+      let from = this.activPage * this.perPage - this.perPage;
+      let to = this.activPage * this.perPage;
+      return this.paymentList.slice(from, to);
+    },
   },
 
   // actions: {
@@ -70,8 +81,13 @@ export default {
     // this.setPaymentsListData(this.fetchData);
     this.$store.dispatch("fetchData");
     this.$store.dispatch("loadCategoryList");
-    this.setImageElement()
   },
+
+  // watch: {
+  //   activPage () {
+  //     this.changeActivPage();
+  //   }
+  // }
   // mounted() {
   //   if(!this.getCategoryList.length) {
   //     // this.loadeCategoryList()
