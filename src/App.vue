@@ -11,7 +11,11 @@
         :showForm="showForm"
       />
       <PaymentsDisplay :items="setImageElement" />
-      <Pagination :pages="pages" :activPage="activPage" @changepage="changeActivPage" />
+      <Pagination
+        :pages="setPages"
+        :activPage="activPage"
+        @changepage="changeActivPage"
+      />
     </main>
   </div>
 </template>
@@ -33,10 +37,8 @@ export default {
   data: () => {
     return {
       showForm: false,
-      pages: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
       activPage: 1,
       perPage: 10,
-      item: [],
     };
   },
 
@@ -50,50 +52,36 @@ export default {
     showAddForm() {
       return (this.showForm = !this.showForm);
     },
-    
+
     changeActivPage(numPage) {
       this.activPage = numPage;
     },
   },
 
   computed: {
-    ...mapGetters([
-      "getPaymentList",
-      "getFullPaymentValue",
-      "getCategoryList"]),
+    ...mapGetters(["getPaymentList", "getFullPaymentValue", "getCategoryList"]),
 
-    paymentList () {
-      return this.$store.getters.getPaymentList
+    paymentList() {
+      return this.$store.getters.getPaymentList;
     },
     setImageElement() {
       let from = this.activPage * this.perPage - this.perPage;
       let to = this.activPage * this.perPage;
       return this.paymentList.slice(from, to);
     },
+    setPages() {
+      let pages = [];
+      let pagesNum = Math.ceil(this.paymentList.length / this.perPage);
+      for (let i = 1; i <= pagesNum; i++) {
+        pages.push(i);
+      }
+      return pages;
+    },
   },
-
-  // actions: {
-  //   ...mapActions(['loadCategotyList'])
-  // },
-
   created() {
-    // this.paymentsList = this.fetchData();
-    // this.setPaymentsListData(this.fetchData);
     this.$store.dispatch("fetchData");
     this.$store.dispatch("loadCategoryList");
   },
-
-  // watch: {
-  //   activPage () {
-  //     this.changeActivPage();
-  //   }
-  // }
-  // mounted() {
-  //   if(!this.getCategoryList.length) {
-  //     // this.loadeCategoryList()
-  //     this.$store.dispatch('loadCategoryList')
-  //   }
-  // }
 };
 </script>
 

@@ -5,7 +5,8 @@
       v-for="(pageNumber, idx) in pages.slice(page - 1, page + 6)"
       :key="idx"
       @click="setActivPage(pageNumber)"
-      :class="{ active: activPage === pageNumber }">
+      :class="{ active: activPage === pageNumber }"
+    >
       {{ pageNumber }}
     </button>
     <button v-if="page < pages.length - 2" @click="page++">Next</button>
@@ -21,7 +22,7 @@ export default {
       default: () => [],
     },
     activPage: {
-      type: String,
+      type: Number,
     },
   },
   data() {
@@ -41,5 +42,10 @@ export default {
 .pagination {
   display: flex;
   justify-content: center;
+}
+
+.active {
+  background: rgb(36, 142, 212);
+  color: #000;
 }
 </style>
