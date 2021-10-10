@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-    <header>
-      <div class="header">My personal costs</div>      
-    </header>    
     <main>
       <button @click="showAddForm">ADD NEW COST +</button>
       <AddPaymentForm
@@ -39,6 +36,7 @@ export default {
       showForm: false,
       activPage: 1,
       perPage: 10,
+      page: 1
     };
   },
 
@@ -81,6 +79,8 @@ export default {
   created() {
     this.$store.dispatch("fetchData");
     this.$store.dispatch("loadCategoryList");
+    // this.activPage = Number(this.$route.params.page);
+    this.$route.params.page = this.activPage
   },
 };
 </script>
@@ -92,6 +92,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 20px;
 }
 </style>
