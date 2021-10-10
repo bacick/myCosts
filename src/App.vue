@@ -29,7 +29,7 @@ export default {
       page: "dashboard",
     };
   },
-  methodes: {
+  methods: {
     setPage() {
       this.page = location.hash.slice(1);
     },
