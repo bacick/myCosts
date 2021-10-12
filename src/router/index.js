@@ -5,12 +5,6 @@ import Dashboard from "../views/Dashboard";
 import About from "../views/About";
 import NotFound from "../views/NotFound";
 
-// import {
-//     Dashboard,
-//     About,
-//     NotFound
-// } from '@/views'
-
 Vue.use(Router);
 
 const router = new Router({
@@ -44,13 +38,13 @@ const router = new Router({
 });
 
 const titles = {
-  dashboard: 'Dashboard',
-  about: 'About',
-  NotFound: 'NotFound',
-}
+  dashboard: "Dashboard",
+  about: "About",
+  NotFound: "NotFound",
+};
 
 router.afterEach((to) => {
-  document.title = titles[to.name]
-})
+  document.title = titles[to.name];
+});
 
-export default router
+export default router;

@@ -1,25 +1,19 @@
 <template>
   <div id="app">
     <main>
-      <button @click="showAddForm">ADD NEW COST +</button>
-      <AddPaymentForm
-        @addNewPayment="addNewPayment"
-        :categoryList="getCategoryList"
-        :showForm="showForm"
-      />
       <PaymentsDisplay :items="setImageElement" />
       <Pagination
         :pages="setPages"
         :activPage="activPage"
         @changepage="changeActivPage"
       />
+      <button @click="addPayment">add</button>
     </main>
   </div>
 </template>
 
 <script>
 import PaymentsDisplay from "../components/PaymentsDisplay.vue";
-import AddPaymentForm from "../components/AddPaymentForm.vue";
 import Pagination from "../components/Pagination.vue";
 import { mapMutations, mapGetters } from "vuex";
 
@@ -27,37 +21,33 @@ export default {
   name: "Dashboard",
   components: {
     PaymentsDisplay,
-    AddPaymentForm,
     Pagination,
   },
 
   data: () => {
     return {
-      showForm: false,
       activPage: 1,
       perPage: 10,
-      page: 1
+      page: 1,
     };
   },
 
   methods: {
     ...mapMutations(["setPaymentsListData"]),
 
-    addNewPayment(data) {
-      data.id = this.paymentList.length + 1;
-      this.$store.commit("addDataToPaymentList", data);
-    },
-    showAddForm() {
-      return (this.showForm = !this.showForm);
-    },
-
     changeActivPage(numPage) {
       this.activPage = numPage;
+    },
+    addPayment() {
+      this.$modal.show({
+        title: "Add Payment Form",
+        content: "AddPaymentForm",
+      });
     },
   },
 
   computed: {
-    ...mapGetters(["getPaymentList", "getFullPaymentValue", "getCategoryList"]),
+    ...mapGetters(["getPaymentList", "getFullPaymentValue"]),
 
     paymentList() {
       return this.$store.getters.getPaymentList;
@@ -80,7 +70,7 @@ export default {
     this.$store.dispatch("fetchData");
     this.$store.dispatch("loadCategoryList");
     // this.activPage = Number(this.$route.params.page);
-    this.$route.params.page = this.activPage
+    this.$route.params.page = this.activPage;
   },
 };
 </script>

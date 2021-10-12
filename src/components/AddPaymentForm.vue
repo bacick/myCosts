@@ -1,5 +1,5 @@
 <template>
-  <div class="add-form" v-if="showForm">
+  <div class="add-form">
     <input type="date" placeholder="Date" v-model="date" />
     <select name="Category" v-model="category">
       <option v-for="(option, idx) in categoryList" :value="option" :key="idx">
@@ -15,16 +15,6 @@
 <script>
 export default {
   name: "AddPaymentForm",
-  props: {
-    showForm: {
-      type: Boolean,
-      default: false,
-    },
-    categoryList: {
-      type: Array,
-      default: () => [],
-    },
-  },
   data() {
     return {
       category: "",
@@ -40,10 +30,20 @@ export default {
         category: this.category,
         value: +this.value,
       };
-      this.$emit("addNewPayment", data);
+      this.addData(data);
+    },
+    addData(data) {
+      data.id = this.paymentList.length + 1;
+      this.$store.commit("addDataToPaymentList", data);
     },
   },
   computed: {
+    categoryList() {
+      return this.$store.getters.getCategoryList;
+    },
+    paymentList() {
+      return this.$store.getters.getPaymentList;
+    },
     getCurrentDate() {
       const today = new Date();
       const day = today.getDate();

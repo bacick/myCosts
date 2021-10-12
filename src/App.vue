@@ -7,21 +7,48 @@
         <router-link to="/about" class="link">about</router-link>
       </div>
     </header>
-    <router-view />
+    <main>
+      <router-view />
+    </main>
+    <ModalWindowAddPayments
+      v-if="modalSettings.showForm"
+      v-bind="modalSettings"
+    />
   </div>
 </template>
 
 <script>
+import ModalWindowAddPayments from "./components/ModalWindowAddPayments.vue";
 export default {
   name: "App",
+  components: { ModalWindowAddPayments },
   data() {
-    return {};
+    return {
+      modalSettings: {
+        showForm: false,
+      },
+    };
   },
-  methods: {},
+  methods: {
+    showAddForm() {
+      this.showForm = false;
+    },
+    onShown(settings) {
+      this.modalSettings = settings;
+      this.modalSettings.showForm = true;
+    },
+    onHide() {
+      this.modalSettings = {};
+      this.modalSettings.showForm = false;
+    },
+  },
+  mounted() {
+    this.$modal.EventBus.$on("onShown", this.onShown);
+    this.$modal.EventBus.$on("onHide", this.onHide);
+  },
   created() {
     this.$store.dispatch("fetchData");
-    this.$store.dispatch("fetchCategoryList");
-    this.$router.push({ name: "dashboard" });
+    this.$store.dispatch("loadCategoryList");
   },
 };
 </script>
