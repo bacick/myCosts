@@ -3,7 +3,8 @@
     <div class="overlay"></div>
     <div class="header">{{ title }}</div>
     <div class="content">
-      <AddPaymentForm v-if="content === 'AddPaymentForm'" />
+      <!-- <AddPaymentForm v-if="content === 'AddPaymentForm'" /> -->
+      <component :is="content" />
       <div class="footer">
         <button @click="onCloseClick">Close</button>
       </div>

@@ -14,14 +14,21 @@
       v-if="modalSettings.showForm"
       v-bind="modalSettings"
     />
+    <transition name="fade">
+      <context-menu />
+    </transition>
   </div>
 </template>
 
 <script>
 import ModalWindowAddPayments from "./components/ModalWindowAddPayments.vue";
+import ContextMenu from "./components/ContextMenu.vue";
 export default {
   name: "App",
-  components: { ModalWindowAddPayments },
+  components: {
+    ModalWindowAddPayments,
+    ContextMenu,
+  },
   data() {
     return {
       modalSettings: {
