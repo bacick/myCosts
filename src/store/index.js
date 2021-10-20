@@ -9,6 +9,14 @@ export default new Vuex.Store({
     categoryList: [],
   },
   mutations: {
+    deleteItemPayment(state, payload) {
+      let arr = state.paymentList
+      arr.splice(payload-1, 1)
+      arr.forEach((item, idx) => {
+        item.id = idx + 1
+      })
+      state.paymentList = arr
+    },
     setPaymentsListData(state, payload) {
       state.paymentList = payload;
     },
@@ -34,7 +42,7 @@ export default new Vuex.Store({
       return new Promise((resolve) => {
         setTimeout(() => {
           let elements = [];
-          for (let i = 0; i <= 100; i++) {
+          for (let i = 1; i <= 100; i++) {
             elements.push({
               id: i,
               date: "28.03.2020",

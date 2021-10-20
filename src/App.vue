@@ -21,13 +21,14 @@
 </template>
 
 <script>
-import ModalWindowAddPayments from "./components/ModalWindowAddPayments.vue";
-import ContextMenu from "./components/ContextMenu.vue";
+// import ModalWindowAddPayments from "./components/ModalWindowAddPayments.vue";
+// import ContextMenu from "./components/ContextMenu.vue";
 export default {
   name: "App",
   components: {
-    ModalWindowAddPayments,
-    ContextMenu,
+    ModalWindowAddPayments: () =>
+      import("./components/ModalWindowAddPayments.vue"),
+    ContextMenu: () => import("./components/ContextMenu.vue"),
   },
   data() {
     return {
