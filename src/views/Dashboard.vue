@@ -7,7 +7,7 @@
         :activPage="activPage"
         @changepage="changeActivPage"
       />
-      <button @click="addPayment">add</button>
+      <button @click="addPayment">Add Payment</button>
     </main>
   </div>
 </template>

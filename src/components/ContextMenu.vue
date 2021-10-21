@@ -1,5 +1,7 @@
+
+
 <template>
-  <div class="context" v-if="shown" :style="styles">
+  <div class="context" v-on-clickaway="onClose" v-if="shown" :style="styles">
     <div
       class="context__item"
       v-for="item in items"
@@ -12,8 +14,10 @@
 </template>
 
 <script>
+import { mixin as clickaway } from 'vue-clickaway';
 export default {
   name: "ContextMenu",
+  mixins: [ clickaway ],
   data() {
     return {
       items: [],
@@ -49,6 +53,12 @@ export default {
       };
     },
   },
+  // created() {
+  //          let vm = this;
+  //           document.addEventListener('click', function () {
+  //            vm.onClose();
+  //           });
+  //       },
   mounted() {
     this.$context.EventBus.$on("shown", this.onShown);
     this.$context.EventBus.$on("close", this.onClose);

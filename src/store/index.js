@@ -10,12 +10,12 @@ export default new Vuex.Store({
   },
   mutations: {
     deleteItemPayment(state, payload) {
-      let arr = state.paymentList
-      arr.splice(payload-1, 1)
+      let arr = state.paymentList;
+      arr.splice(payload - 1, 1);
       arr.forEach((item, idx) => {
-        item.id = idx + 1
-      })
-      state.paymentList = arr
+        item.id = idx + 1;
+      });
+      state.paymentList = arr;
     },
     setPaymentsListData(state, payload) {
       state.paymentList = payload;

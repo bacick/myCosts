@@ -2,11 +2,12 @@
   <div>
     <div class="payments" v-for="item in items" :key="item.id">
       <span>{{ item.id }}</span
-      >-<span>{{ item.date}}</span
+      >-<span>{{ item.date }}</span
       >-<span>{{ item.category }}</span
       >-<span>{{ item.value }}</span
       >-<span @click="onClickContextItem($event, item)" class="contextevent"
-        >...</span>
+        >...</span
+      >
     </div>
   </div>
 </template>
@@ -26,7 +27,8 @@ export default {
         {
           text: "Edit",
           action: () => {
-            console.log("edit", item);
+            // console.log("edit", item);
+            this.actionEdit(item)
           },
         },
         {
@@ -39,15 +41,24 @@ export default {
       this.$context.show({ event, items });
     },
     actionDelete(id) {
-       this.$store.commit("deleteItemPayment", id)
+      this.$store.commit("deleteItemPayment", id);
       this.$context.close();
     },
+    actionEdit(item) {
+      console.log(item);
+      this.$modal.show({
+        title: "Add Payment Form",
+        content: "AddPaymentForm",
+        value: 1000
+      });
+      this.$context.close();
+    }
   },
 };
 </script>
 
 <style>
-  .contextevent {
-    cursor: pointer;
-  }
+.contextevent {
+  cursor: pointer;
+}
 </style>
