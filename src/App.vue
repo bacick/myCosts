@@ -74,11 +74,13 @@ export default {
   margin-right: 10px;
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .10s;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.1s;
 }
 
-.fade-enter, .fade-leave-to {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 </style>

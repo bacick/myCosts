@@ -28,7 +28,7 @@ export default {
           text: "Edit",
           action: () => {
             // console.log("edit", item);
-            this.actionEdit(item)
+            this.actionEdit(item);
           },
         },
         {
@@ -49,10 +49,15 @@ export default {
       this.$modal.show({
         title: "Add Payment Form",
         content: "AddPaymentForm",
-        value: 1000
+        data: {
+          id: item.id,
+          category: item.category || "",
+          value: item.value || "",
+          date: item.date || "",
+        },
       });
       this.$context.close();
-    }
+    },
   },
 };
 </script>

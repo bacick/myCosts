@@ -9,6 +9,11 @@ export default new Vuex.Store({
     categoryList: [],
   },
   mutations: {
+    editItemPayment(state, payload) {
+      state.paymentList = state.paymentList.map((item) =>
+        item.id === payload.id ? payload : item
+      );
+    },
     deleteItemPayment(state, payload) {
       let arr = state.paymentList;
       arr.splice(payload - 1, 1);
@@ -42,11 +47,11 @@ export default new Vuex.Store({
       return new Promise((resolve) => {
         setTimeout(() => {
           let elements = [];
-          for (let i = 1; i <= 100; i++) {
+          for (let i = 1; i <= 50; i++) {
             elements.push({
               id: i,
               date: "28.03.2020",
-              category: "Food",
+              category: "Transport",
               value: i * 10,
             });
           }
