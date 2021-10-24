@@ -18,6 +18,14 @@ const router = new Router({
     //   component: Dashboard,
     // },
     {
+      path: "/dashboard/:action/:section/:category",
+      name: "AddPaymentFromUrl",
+      component: () =>
+        import(
+          /* webpackChunkName: "PageDashBoard" */ "../views/Dashboard.vue"
+        ),
+    },
+    {
       path: "/about*",
       name: "About",
       component: () =>

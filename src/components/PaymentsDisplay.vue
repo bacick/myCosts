@@ -45,7 +45,7 @@ export default {
       this.$context.close();
     },
     actionEdit(item) {
-      console.log(item);
+      // console.log(item);
       this.$modal.show({
         title: "Add Payment Form",
         content: "AddPaymentForm",
