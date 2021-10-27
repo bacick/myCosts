@@ -9,7 +9,7 @@
     </header>
     <main>
       <router-view />
-      <test-component :message="Test"/>
+      <test-component :message="Test" />
     </main>
     <ModalWindowAddPayments
       v-if="modalSettings.showForm"
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import TestComponent from './components/TestComponent.vue';
+import TestComponent from "./components/TestComponent.vue";
 // import ModalWindowAddPayments from "./components/ModalWindowAddPayments.vue";
 // import ContextMenu from "./components/ContextMenu.vue";
 export default {
@@ -30,7 +30,7 @@ export default {
   components: {
     ModalWindowAddPayments: () =>
       import("./components/ModalWindowAddPayments.vue"),
-    ContextMenu: () => import("./components/ContextMenu.vue")
+    ContextMenu: () => import("./components/ContextMenu.vue"),
     TestComponent,
   },
   data() {

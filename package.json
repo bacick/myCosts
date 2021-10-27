@@ -17,27 +17,31 @@
       "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
     },
     "collectCoverage": true,
-    "collectCoverageFrom": ["**/*.{js,vue}", "!**/node_modules/**"]
-  },  
+    "collectCoverageFrom": [
+      "**/*.{js,vue}",
+      "!**/node_modules/**"
+    ]
+  },
   "dependencies": {
-    "core-js": "^3.6.5",
+    "core-js": "^3.19.0",
     "vue": "^2.6.11",
     "vue-clickaway": "^2.2.2",
-    "vue-router": "^3.5.2"
+    "vue-router": "^3.5.3"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
+    "@vue/cli-plugin-babel": "^4.5.14",
+    "@vue/cli-plugin-eslint": "^4.5.14",
+    "@vue/cli-service": "^4.5.14",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/test-utils": "^1.2.2",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^27.3.1",
-    "eslint": "^8.1.0",
+    "eslint": "^6.7.1",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^6.2.2",
+    "eslint-webpack-plugin": "^3.1.0",
     "jest": "^27.3.1",
     "prettier": "^2.2.1",
     "vue-jest": "^3.0.7",
