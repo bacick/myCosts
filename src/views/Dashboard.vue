@@ -103,7 +103,7 @@ export default {
     await this.$store.dispatch("fetchData");
     await this.$store.dispatch("loadCategoryList");
     // this.activPage = Number(this.$route.params.page);
-    // this.$route.params.page = this.activPage;
+    this.$route.params.page = this.activPage;
     if (this.$route.name === "AddPaymentFromUrl") {
       this.addItem();
     }

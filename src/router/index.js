@@ -5,6 +5,7 @@ Vue.use(Router);
 
 const router = new Router({
   mode: "history",
+  // history: createWebHashHistory(),
   routes: [
     {
       path: "/dashboard",
@@ -37,10 +38,10 @@ const router = new Router({
       component: () =>
         import(/*webpackChunkName: "NotFound"*/ "../views/NotFound.vue"),
     },
-    {
-      path: "*",
-      redirect: "notfound",
-    },
+    // {
+    //   path: "*",
+    //   redirect: "notfound",
+    // },
   ],
 });
 
